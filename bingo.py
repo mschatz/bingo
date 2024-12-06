@@ -76,9 +76,15 @@ def save_bingo_cards_as_pdf(cards, output_file, png_file):
                                 line = word + ' '
                         wrapped_text += line.strip()
                         lines = wrapped_text.count('\n') + 1
+                        if (lines == 2):
+                            wrapped_text = '\n' + wrapped_text + '\n' + '\n'
+                            lines = 4
+                        elif (lines == 3):
+                            wrapped_text = '\n' + wrapped_text + '\n' + '\n'
+                            lines = 5
                         pdf.multi_cell(cell_width, cell_height / lines, wrapped_text, border=1, align='C', fill=True)
                     else:
-                        pdf.multi_cell(cell_width, cell_height, cell, border=1, align='C', fill=True)
+                        pdf.multi_cell(cell_width, cell_height, cell, border=1, align='C', fill=True,)
             pdf.set_y(y_position + cell_height)
 
         if png_file and os.path.exists(png_file):
